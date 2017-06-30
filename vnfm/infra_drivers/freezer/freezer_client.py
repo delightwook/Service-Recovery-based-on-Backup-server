@@ -22,6 +22,8 @@ class FreezerClient(object):
     #### Freezer Client #####
     def __init__(self,auth_attr,region_name):
 
+
+        print("#$############################################### 6.5 Freezer init#############################")
         print("#$############################################### 6.5 Freezer init#############################")
         print("#$############################################### 6.5 Freezer init#############################")
         self.keystone = OpenstackClients(auth_attr, region_name).keystone_session
