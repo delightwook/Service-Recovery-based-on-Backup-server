@@ -215,7 +215,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         vnfd_dict['mgmt_driver'] = toscautils.get_mgmt_driver(
             tosca)
         LOG.debug(_('vnfd %s'), vnfd)
-
+###### Call VNF Monitor Action
     def add_vnf_to_monitor(self, context, vnf_dict):
         dev_attrs = vnf_dict['attributes']
         mgmt_url = vnf_dict['mgmt_url']

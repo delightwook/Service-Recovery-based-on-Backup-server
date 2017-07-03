@@ -22,41 +22,19 @@ class FreezerClient(object):
     #### Freezer Client #####
     def __init__(self,auth_attr,region_name):
 
-
-        print("#$############################################### 6.5 Freezer init#############################")
-        print("#$############################################### 6.5 Freezer init#############################")
-        print("#$############################################### 6.5 Freezer init#############################")
-        print("#$############################################### 6.5 Freezer init#############################")
         self.keystone = OpenstackClients(auth_attr, region_name).keystone_session
-        print("self.keystone.auth_token ",self.keystone.get_token())
 
-        print("#$############################################### 6.5 Freezer init#############################")
-        print("#$############################################### 6.5 Freezer init#############################")
-        print("#$############################################### 6.5 Freezer init#############################")
-        print("\n")
-        print("\n")
-        print("\n")
         self.auth_token = self.keystone.get_token()
         self.auth_attr = auth_attr
-        print("#$############################################### 6.5 Freezer init#############################")
-        print("\n")
-        print("\n")
-        print("\n")
-        print("auth_attr ", self.auth_attr)
-        print("#$############################################### 6.5 Freezer init#############################")
-        print("\n")
-        print("\n")
-        print("\n")
 
         self.endpoint = self.keystone.get_endpoint(
             service_type='backup', region_name=None)
 
-        print("self.endpoint ",self.endpoint)
 
         print("#$############################################### 6.5 Freezer init endpoint#############################")
         self.client = freezerclient.Client(token=self.auth_token, username=self.auth_attr['username'], password=self.auth_attr['password'],
                           tenant_name=self.auth_attr['project_name'], auth_url=self.auth_attr['auth_url'],
-                          session=self.keystone.session,
+                          session=self.keystone,
                           endpoint=self.endpoint, opts=None, project_name='admin', user_domain_name='Default',
                           project_domain_name='Default', verify=True,cert=None)
 
@@ -66,17 +44,6 @@ class FreezerClient(object):
 
 
     def create(self):
-        print("\n")
-        print("\n")
-        print("\n")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("############### create in freezer_client : 7")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("\n")
         print("Here is Function Freezer !!!!!!!!! 2017.06.29############")
+        jobs = self.client.jobs.list()
+        print(jobs)
