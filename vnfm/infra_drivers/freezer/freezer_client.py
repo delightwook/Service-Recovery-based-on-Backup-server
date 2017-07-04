@@ -46,4 +46,5 @@ class FreezerClient(object):
     def create(self):
         print("Here is Function Freezer !!!!!!!!! 2017.06.29############")
         jobs = self.client.jobs.list()
+        return jobs
         print(jobs)

@@ -147,6 +147,27 @@ class VNF(model_base.BASE, models_v1.HasId, models_v1.HasTenant,
     )
 
 
+class vnfbackup(model_base.BASE, models_v1.HasId, models_v1.HasTenant,models_v1.Audit):
+    """Represents vnfs that hosts services.
+
+    Here the term, 'VM', is intentionally avoided because it can be
+    VM or other container.
+    """
+
+    __tablename__ = 'vnfbackup'
+    id = sa.Column(sa.String(36), nullable=False)
+    tenant_id = sa.Column(sa.String(64), nullable=False)
+    name = sa.Column(sa.String(255), nullable=False)
+    job_id = sa.Column(sa.String(length=36), nullable=False)
+    action = sa.Column(sa.String(length=36), nullable=False)
+    result = sa.Column(sa.String(length=36), nullable=False)
+    event = sa.Column(sa.String(length=36), nullable=False)
+    start_time = sa.Column(sa.String(length=64), nullable=False)
+    end_time = sa.Column(sa.String(length=64),nullable=False)
+    interval = sa.Column(sa.String(length=64), nullable=False)
+
+
+
 class VNFAttribute(model_base.BASE, models_v1.HasId):
     """Represents kwargs necessary for spinning up VM in (key, value) pair.
 
@@ -178,6 +199,18 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
         self._cos_db_plg = common_services_db.CommonServicesPluginDb()
 
     def _get_resource(self, context, model, id):
+        print("\n")
+        print("\n")
+        print("#################################################################")
+        print("#################################################################")
+        print("#################vnfm_db.py -> _get_resource#####################")
+        print("#################################################################")
+        print("#################################################################")
+        print("context : ",context)
+        print("model : ",model)
+        print("id : ",id)
+        print("\n")
+        print("\n")
         try:
             if uuidutils.is_uuid_like(id):
                 return self._get_by_id(context, model, id)
@@ -337,6 +370,20 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
                 context.session.delete(vnfd_db)
 
     def get_vnfd(self, context, vnfd_id, fields=None):
+
+        print("\n")
+        print("\n")
+        print("#################################################################")
+        print("#################################################################")
+        print("#################vnfm_db.py -> _get_vnfd#####################")
+        print("#################################################################")
+        print("#################################################################")
+        print("context : ",context)
+        print("model : ",vnfd_id)
+        print("fields : ",fields)
+        print("\n")
+        print("\n")
+
         vnfd_db = self._get_resource(context, VNFD, vnfd_id)
         return self._make_vnfd_dict(vnfd_db)
 
@@ -680,3 +727,21 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
             constants.ERROR]
         return self._mark_vnf_status(
             vnf_id, exclude_status, constants.DEAD)
+
+
+
+    ########define backupdb
+    def _make_backup_dict(self, backup_db, fields=None):
+        res = {}
+        print("_make_backup_dcit #R#########",backup_db)
+        key_list = ('vnf_id', 'job_id', 'action', 'result', 'event',
+                    'start_time', 'end_time', 'interval')
+        res.update((key, backup_db[key]) for key in key_list)
+
+        return self._fields(res, fields)
+
+
+    def _get_vnfbackup(self, context, vnf_id, fields=None):
+        vnf_db = self._get_resource(context, vnfbackup, vnf_id)
+        print("################nf_db",vnf_db)
+        return self._make_backup_dict(vnf_db, fields)

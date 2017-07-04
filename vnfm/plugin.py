@@ -215,6 +215,8 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         vnfd_dict['mgmt_driver'] = toscautils.get_mgmt_driver(
             tosca)
         LOG.debug(_('vnfd %s'), vnfd)
+
+
 ###### Call VNF Monitor Action
     def add_vnf_to_monitor(self, context, vnf_dict):
         dev_attrs = vnf_dict['attributes']
@@ -259,6 +261,17 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             }
         }
         self.update_vnf(context, vnf_id, update)
+#################################### get vnf_backup good
+    def get_vnfbackup(self,context,filters=None, fields=None):
+        print("###################plugin.py ##### Line 266 get_vnfbackup")
+        print("###############context ",context)
+        print("###############fileter ", filter)
+        backup_dict = self._get_vnfbackup(context,filters,fields)
+
+
+
+
+        pass
 
     def _get_infra_driver(self, context, vnf_info):
         print("#######################################################")
