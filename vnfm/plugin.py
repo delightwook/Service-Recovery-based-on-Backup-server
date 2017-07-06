@@ -17,6 +17,7 @@
 import inspect
 import six
 import yaml
+import uuid
 
 import eventlet
 from oslo_config import cfg
@@ -262,16 +263,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         }
         self.update_vnf(context, vnf_id, update)
 #################################### get vnf_backup good
-    def get_vnfbackup(self,context,filters=None, fields=None):
-        print("###################plugin.py ##### Line 266 get_vnfbackup")
-        print("###############context ",context)
-        print("###############fileter ", filter)
-        backup_dict = self._get_vnfbackup(context,filters,fields)
 
-
-
-
-        pass
 
     def _get_infra_driver(self, context, vnf_info):
         print("#######################################################")
@@ -403,20 +395,65 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         vnf_dict['instance_id'] = instance_id
         return vnf_dict
 
+
+
+    def _create_backup(self, context, backup_info,backup_name):
+        print("##################Called __create_backup in plugin.py################")
+        return self._create_backup_pre(context, backup_info,backup_name)
+
+
+
+
+
+
+    def create_vnfbackup(self, context, vnfbackup):
+        def _make_backup_id(backupname):
+            #### test create backup__name
+            backup_uuid = str(uuid.uuid4())
+            name = backupname
+            return name + '-vnfbackup-' + backup_uuid
+
+        print("\n")
+        print("######################################################################")
+        print("############ 2. create_vnfbackup /plugin.py : Line 419 ###############")
+        print("######################################################################")
+        print("######################################################################")
+
+        print("##########################.START STEP 1.##############################")
+
+        ###### Step 1. Create vnf backup name -> inner function.
+        backup_info  =vnfbackup['vnfbackup']
+        ####Create Backup Name
+        backup_name = _make_backup_id(backup_info['name'])
+
+        print("#########################.END STEP 1.##########################")
+
+        print("#########################.START STEP 2.##########################")
+
+        ###### Step 2. Create DB
+        backup_dict = self._create_backup(context, backup_info,backup_name)
+        print("#########################.START STEP 2.##########################")
+        return backup_dict
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def create_vnf(self, context, vnf):
         print("\n")
-        print("\n")
-        print("\n")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("############### create_vnf in plugin. py : 3")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("\n")
+        print("###########################################################################")
+        print("################## 2. create_vnf /plugin.py : Line 418 ####################")
+        print("###########################################################################")
         print("\n")
 
         vnf_info = vnf['vnf']

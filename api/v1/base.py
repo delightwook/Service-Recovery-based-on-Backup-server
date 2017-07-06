@@ -26,6 +26,9 @@ from tacker.api.v1 import resource as wsgi_resource
 from tacker.common import exceptions
 from tacker.common import rpc as n_rpc
 from tacker import policy
+###test
+import os
+
 
 
 LOG = logging.getLogger(__name__)
@@ -347,25 +350,18 @@ class Controller(object):
         self._notifier.info(request.context,
                             self._resource + '.create.start',
                             body)
+
         body = Controller.prepare_request_body(request.context, body, True,
                                                self._resource, self._attr_info,
                                                allow_bulk=self._allow_bulk)
         action = self._plugin_handlers[self.CREATE]
         # Check authz
+        os.system('clear')
         print("\n")
-        print("\n")
-        print("\n")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("############### create in base.py : ", body)
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-
-        print("\n")
+        print("######################################################################")
+        print("############## 1. Create in api/ v1 /base.py : Line 357 ##############")
+        print("######################################################################")
+        print("###################_resource",self._resource,"######################")
         print("\n")
 
         if self._collection in body:

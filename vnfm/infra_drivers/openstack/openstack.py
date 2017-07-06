@@ -133,23 +133,29 @@ class OpenStack(abstract_driver.DeviceAbstractDriver,
         #self._create_freezer(freezerclient)
 
         return stack['stack']['id']
+    def create_vnfbackup(self, context, vnfbackup):
+        print("\n")
+        print("###########################################################################")
+        print("############## 2. create_vnfbackup /plugin.py : Line 419 ##################")
+        print("###########################################################################")
+        print("\n")
 
-    @log.log
-    def _create_freezer(self,freezerclient):
-        fzr = freezerclient.get_client()
-
-        #######################input freezer function call#$$$$$$$$$$$$$$$$$$$$$$
-        #######################input freezer function call$#$$$$$$$$$$$$$$$$$$$$$$
-        #######################input freezer function call$#$$$$$$$$$$$$$$$$$$$$$$
-        #######################input freezer function call#$$$$$$$$$$$$$$$$$$$$$$
-        #######################input freezer function call#$$$$$$$$$$$$$$$$$$$$$$
-        #######################input freezer function call#$$$$$$$$$$$$$$$$$$$$$$
-        #######################input freezer function call$$$$$$$$$$$$$$$$$$$$$$
-
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
+    # @log.log
+    # def _create_freezer(self,freezerclient):
+    #     fzr = freezerclient.get_client()
+    #
+    #     #######################input freezer function call#$$$$$$$$$$$$$$$$$$$$$$
+    #     #######################input freezer function call$#$$$$$$$$$$$$$$$$$$$$$$
+    #     #######################input freezer function call$#$$$$$$$$$$$$$$$$$$$$$$
+    #     #######################input freezer function call#$$$$$$$$$$$$$$$$$$$$$$
+    #     #######################input freezer function call#$$$$$$$$$$$$$$$$$$$$$$
+    #     #######################input freezer function call#$$$$$$$$$$$$$$$$$$$$$$
+    #     #######################input freezer function call$$$$$$$$$$$$$$$$$$$$$$
+    #
+    #     print("#######################################################")
+    #     print("#######################################################")
+    #     print("#######################################################")
+    #     print("#######################################################")
 
     @log.log
     def _create_stack(self, heatclient, vnf, fields,auth_attr,region_one):

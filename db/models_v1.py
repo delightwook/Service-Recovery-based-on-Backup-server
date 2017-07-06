@@ -20,6 +20,15 @@ import sqlalchemy as sa
 from tacker.db import types
 
 
+
+
+
+
+
+
+
+
+
 class HasTenant(object):
     """Tenant mixin, add to subclasses that have a tenant."""
 

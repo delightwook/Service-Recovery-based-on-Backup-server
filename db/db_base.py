@@ -183,9 +183,11 @@ class CommonDbMixin(object):
                                            limit=limit,
                                            marker_obj=marker_obj,
                                            page_reverse=page_reverse)
+        print("############## query ")
         items = [dict_func(c, fields) for c in query]
         if limit and page_reverse:
             items.reverse()
+
         return items
 
     def _get_collection_count(self, context, model, filters=None):
