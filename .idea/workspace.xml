@@ -2,16 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c367540-9f04-4df8-a1d7-01ccdf26d123" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migration/alembic_migrations/versions/4d165049144d_vnfdisaster.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezerdst.conf" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/v1/base.py" afterPath="$PROJECT_DIR$/api/v1/base.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_base.py" afterPath="$PROJECT_DIR$/db/db_base.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migration/alembic_migrations/versions/HEAD" afterPath="$PROJECT_DIR$/db/migration/alembic_migrations/versions/HEAD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/models_v1.py" afterPath="$PROJECT_DIR$/db/models_v1.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/vnfm/vnfm_db.py" afterPath="$PROJECT_DIR$/db/vnfm/vnfm_db.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/extensions/vnfm.py" afterPath="$PROJECT_DIR$/extensions/vnfm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vnfm/infra_drivers/freezer/client.json" afterPath="$PROJECT_DIR$/vnfm/infra_drivers/freezer/client.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezer_client.py" afterPath="$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezer_client.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezerdst.json" afterPath="$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezerdst.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vnfm/infra_drivers/openstack/openstack.py" afterPath="$PROJECT_DIR$/vnfm/infra_drivers/openstack/openstack.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vnfm/plugin.py" afterPath="$PROJECT_DIR$/vnfm/plugin.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vnfm/vim_client.py" afterPath="$PROJECT_DIR$/vnfm/vim_client.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,41 +48,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="vnfm.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/extensions/vnfm.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="329" column="32" lean-forward="true" selection-start-line="329" selection-start-column="32" selection-end-line="329" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="openstack.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vnfm/infra_drivers/openstack/openstack.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3249">
-              <caret line="186" column="19" lean-forward="false" selection-start-line="186" selection-start-column="19" selection-end-line="186" selection-end-column="19" />
-              <folding />
+            <state relative-caret-position="1782">
+              <caret line="442" column="0" lean-forward="false" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+              <folding>
+                <element signature="e#636#647#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="freezer_client.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="freezer_client.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezer_client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state relative-caret-position="722">
+              <caret line="79" column="0" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plugin.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plugin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vnfm/plugin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="423" column="64" lean-forward="false" selection-start-line="423" selection-start-column="64" selection-end-line="423" selection-end-column="64" />
+            <state relative-caret-position="395">
+              <caret line="933" column="0" lean-forward="false" selection-start-line="933" selection-start-column="0" selection-end-line="933" selection-end-column="0" />
               <folding>
                 <element signature="e#642#656#0" expanded="true" />
               </folding>
@@ -88,18 +82,38 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="vnfm.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/extensions/vnfm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="779">
+              <caret line="374" column="10" lean-forward="false" selection-start-line="374" selection-start-column="10" selection-end-line="374" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vim_client.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vnfm/vim_client.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="33" column="29" lean-forward="false" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="vnfm_db.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/vnfm/vnfm_db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="746" column="0" lean-forward="true" selection-start-line="746" selection-start-column="0" selection-end-line="746" selection-end-column="0" />
+            <state relative-caret-position="756">
+              <caret line="784" column="0" lean-forward="true" selection-start-line="784" selection-start-column="0" selection-end-line="784" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/common_services/__init__.py">
+        <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -108,44 +122,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="4d165049144d_vnfdisaster.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/4d165049144d_vnfdisaster.py">
+      <file leaf-file-name="7dba9cf7821f_vnfrecovery.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/7dba9cf7821f_vnfrecovery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="72" column="44" lean-forward="true" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
+            <state relative-caret-position="566">
+              <caret line="52" column="42" lean-forward="true" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db_base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/db_base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="180" column="8" lean-forward="false" selection-start-line="180" selection-start-column="8" selection-end-line="180" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models_v1.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/models_v1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/v1/base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-38">
-              <caret line="373" column="26" lean-forward="true" selection-start-line="373" selection-start-column="26" selection-end-line="373" selection-end-column="26" />
-              <folding>
-                <element signature="e#641#655#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -161,12 +143,18 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>client</find>
       <find>Client</find>
       <find>list</find>
       <find>obj</find>
       <find>vnfd</find>
       <find>collection</find>
+      <find>client</find>
+      <find>free</find>
+      <find>invoke</find>
+      <find>create</find>
+      <find>vim</find>
+      <find>get</find>
+      <find>get_vim</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -193,17 +181,21 @@
         <option value="$PROJECT_DIR$/db/migration/alembic_migrations/versions/8d65812347f3_vnfbackup.py" />
         <option value="$PROJECT_DIR$/db/migration/cli.py" />
         <option value="$PROJECT_DIR$/db/db_base.py" />
-        <option value="$PROJECT_DIR$/vnfm/infra_drivers/openstack/openstack.py" />
         <option value="$PROJECT_DIR$/api/v1/base.py" />
-        <option value="$PROJECT_DIR$/extensions/vnfm.py" />
         <option value="$PROJECT_DIR$/db/migration/alembic_migrations/versions/49821e171f19_vnfdisaster.py" />
-        <option value="$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezer_client.py" />
         <option value="$PROJECT_DIR$/db/models_v1.py" />
         <option value="$PROJECT_DIR$/db/migration/alembic_migrations/versions/5dbfa37139f2_vnfdisaster.py" />
         <option value="$PROJECT_DIR$/db/common_services/__init__.py" />
+        <option value="$PROJECT_DIR$/vnfm/vim_client.py" />
+        <option value="$PROJECT_DIR$/../freezerclient/v1/managers/jobs.py" />
+        <option value="$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezer_client.py" />
+        <option value="$PROJECT_DIR$/vnfm/infra_drivers/openstack/openstack.py" />
         <option value="$PROJECT_DIR$/db/migration/alembic_migrations/versions/4d165049144d_vnfdisaster.py" />
-        <option value="$PROJECT_DIR$/db/vnfm/vnfm_db.py" />
+        <option value="$PROJECT_DIR$/db/migration/alembic_migrations/__init__.py" />
+        <option value="$PROJECT_DIR$/db/migration/alembic_migrations/versions/7dba9cf7821f_vnfrecovery.py" />
         <option value="$PROJECT_DIR$/vnfm/plugin.py" />
+        <option value="$PROJECT_DIR$/extensions/vnfm.py" />
+        <option value="$PROJECT_DIR$/db/vnfm/vnfm_db.py" />
       </list>
     </option>
   </component>
@@ -235,7 +227,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -299,6 +290,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="openstack" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tacker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tacker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vnfm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="infra_drivers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="freezer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -376,7 +389,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="migration" />
+              <option name="myItemId" value="nfvo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -395,10 +408,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="migration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -450,63 +459,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tacker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tacker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common_services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tacker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tacker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tacker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tacker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="v1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tackerclient" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../freezer_api" />
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///usr/local/lib/python2.7/dist-packages/tacker/mistral/mistral_client.py" />
@@ -869,18 +829,18 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23196448" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23136818" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -891,73 +851,19 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/extensions/common_services.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1425">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/api_common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="392" column="14" lean-forward="false" selection-start-line="392" selection-start-column="11" selection-end-line="392" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1/resource_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-935">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/functional/vnfm/test_tosca_vnf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="49" column="39" lean-forward="false" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1140">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nfvo/nfvo_plugin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3192">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/dab0aa2f1a15_vnfbackup.py" />
-    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/b4d55a44ed14_vnfbackup.py" />
     <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/590baba44b7c_vnfbackup.py" />
     <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/86348dfbaaff_vnfbackup.py" />
-    <entry file="file://$PROJECT_DIR$/db/nfvo/nfvo_db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4275">
-          <caret line="245" column="0" lean-forward="false" selection-start-line="245" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/550e970fc547_vnfbackup.py" />
     <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/4752d3c631d8_vnfbackup.py" />
     <entry file="file://$PROJECT_DIR$/db/nfvo/vnffg_db.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="623">
           <caret line="697" column="19" lean-forward="true" selection-start-line="697" selection-start-column="19" selection-end-line="697" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,13 +923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/env.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-743">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cmd/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1071,16 +970,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="56" column="45" lean-forward="true" selection-start-line="56" selection-start-column="45" selection-end-line="56" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezerdst.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezerdst.conf" />
     <entry file="file://$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezerdst.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-11">
@@ -1093,7 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="587">
           <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1118,27 +1011,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vnfm/infra_drivers/openstack/openstack.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3249">
-          <caret line="186" column="19" lean-forward="false" selection-start-line="186" selection-start-column="19" selection-end-line="186" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../../lib/python2.7/dist-packages/sqlalchemy/sql/schema.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50597">
           <caret line="2678" column="8" lean-forward="false" selection-start-line="2678" selection-start-column="8" selection-end-line="2678" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extensions/vnfm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="329" column="32" lean-forward="true" selection-start-line="329" selection-start-column="32" selection-end-line="329" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1147,31 +1023,120 @@
         <state relative-caret-position="-38">
           <caret line="373" column="26" lean-forward="true" selection-start-line="373" selection-start-column="26" selection-end-line="373" selection-end-column="26" />
           <folding>
-            <element signature="e#641#655#0" expanded="true" />
+            <element signature="e#641#655#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/49821e171f19_vnfdisaster.py" />
+    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/5dbfa37139f2_vnfdisaster.py" />
+    <entry file="file://$PROJECT_DIR$/db/common_services/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/db_base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="180" column="8" lean-forward="false" selection-start-line="180" selection-start-column="8" selection-end-line="180" selection-end-column="8" />
+        <state relative-caret-position="247">
+          <caret line="38" column="8" lean-forward="false" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/49821e171f19_vnfdisaster.py">
+    <entry file="file://$PROJECT_DIR$/common/driver_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        <state relative-caret-position="290">
+          <caret line="67" column="8" lean-forward="false" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extensions/nfvo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezer_client.py">
+    <entry file="file://$PROJECT_DIR$/db/models_v1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state relative-caret-position="627">
+          <caret line="37" column="6" lean-forward="false" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/functional/vnfm/test_tosca_vnf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="56" column="39" lean-forward="false" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/-1247972723/__builtin__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/nfvo/nfvo_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2337">
+          <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../freezerclient/v1/managers/jobs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vnfm/vim_client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="33" column="29" lean-forward="false" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vnfm/infra_drivers/openstack/openstack.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1782">
+          <caret line="442" column="0" lean-forward="false" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+          <folding>
+            <element signature="e#636#647#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/4d165049144d_vnfdisaster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/HEAD">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="true" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/env.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1184,53 +1149,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/models_v1.py">
+    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/7dba9cf7821f_vnfrecovery.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="566">
+          <caret line="52" column="42" lean-forward="true" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/5dbfa37139f2_vnfdisaster.py">
+    <entry file="file://$PROJECT_DIR$/extensions/vnfm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/common_services/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migration/alembic_migrations/versions/4d165049144d_vnfdisaster.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="72" column="44" lean-forward="true" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
+        <state relative-caret-position="779">
+          <caret line="374" column="10" lean-forward="false" selection-start-line="374" selection-start-column="10" selection-end-line="374" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/vnfm/vnfm_db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="746" column="0" lean-forward="true" selection-start-line="746" selection-start-column="0" selection-end-line="746" selection-end-column="0" />
+        <state relative-caret-position="756">
+          <caret line="784" column="0" lean-forward="true" selection-start-line="784" selection-start-column="0" selection-end-line="784" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vnfm/plugin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="423" column="64" lean-forward="false" selection-start-line="423" selection-start-column="64" selection-end-line="423" selection-end-column="64" />
+        <state relative-caret-position="395">
+          <caret line="933" column="0" lean-forward="false" selection-start-line="933" selection-start-column="0" selection-end-line="933" selection-end-column="0" />
           <folding>
             <element signature="e#642#656#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vnfm/infra_drivers/freezer/freezer_client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="79" column="0" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

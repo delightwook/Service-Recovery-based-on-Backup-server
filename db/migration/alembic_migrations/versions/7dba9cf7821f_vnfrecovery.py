@@ -13,16 +13,16 @@
 #    under the License.
 #
 
-"""vnfdisaster
+"""vnfrecovery
 
-Revision ID: 4d165049144d
+Revision ID: 7dba9cf7821f
 Revises: e7993093baf1
-Create Date: 2017-07-06 21:12:27.444484
+Create Date: 2017-07-08 15:40:32.807065
 
 """
 
 # revision identifiers, used by Alembic.
-revision = '4d165049144d'
+revision = '7dba9cf7821f'
 down_revision = 'e7993093baf1'
 
 from alembic import op
@@ -31,22 +31,8 @@ import sqlalchemy as sa
 
 from tacker.db import migration
 
-
 def upgrade(active_plugins=None, options=None):
     # job information and Status table
-    op.create_table(
-        'vnfjobinfo',
-        sa.Column('job_id', sa.String(length=36), nullable=False),
-        sa.Column('name', sa.String(length=255), nullable=False),
-        sa.Column('description', sa.String(length=255), nullable=False),
-        sa.Column('nova_instance_id', sa.String(length=48), nullable=False),
-        sa.Column('tacker_instance_id', sa.String(length=48), nullable=False),
-        sa.Column('action', sa.String(length=24), nullable=False),
-        sa.Column('result', sa.String(length=24), nullable=False),
-        sa.Column('status', sa.String(length=24), nullable=False),
-        #    sa.PrimaryKeyConstraint('job_id'),
-        mysql_engine='InnoDB'
-    )
     # backup information and Status table
     op.create_table(
         'vnfbackup',
@@ -56,13 +42,11 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('action', sa.String(length=24), nullable=False),
         sa.Column('container', sa.String(length=24), nullable=False),
         sa.Column('storage', sa.String(length=36), nullable=False),
-        sa.Column('backup_name', sa.String(length=255), nullable=False),
         sa.Column('nova_instance_id', sa.String(length=48), nullable=False),
         sa.Column('job_id', sa.String(length=36), default='', nullable=False),
         sa.Column('start_time', sa.String(length=48), nullable=False),
         sa.Column('end_time', sa.String(length=48), nullable=False),
         sa.Column('interval', sa.String(length=48), nullable=False),
-      #  sa.ForeignKeyConstraint(['job_id'], ['vnfjobinfo.job_id'], ),
         sa.PrimaryKeyConstraint('id'),
         mysql_engine='InnoDB'
     )
@@ -75,7 +59,6 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('action', sa.String(length=24), nullable=False),
         sa.Column('container', sa.String(length=24), nullable=False),
         sa.Column('storage', sa.String(length=36), nullable=False),
-        sa.Column('backup_name', sa.String(length=255), nullable=False),
         sa.Column('nova_instance_id', sa.String(length=48), nullable=False),
         sa.Column('neutron_network_id', sa.String(length=48), nullable=False),
         sa.Column('job_id', sa.String(length=36), nullable=False),
@@ -83,5 +66,4 @@ def upgrade(active_plugins=None, options=None):
         sa.PrimaryKeyConstraint('id'),
         mysql_engine='InnoDB'
     )
-
 

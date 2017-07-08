@@ -373,11 +373,6 @@ RESOURCE_ATTRIBUTE_MAP = {
             'allow_put': False,
             'is_visible': True,
         },
-        'backup_name': {
-            'allow_post': True,
-            'allow_put': False,
-            'is_visible': True,
-        },
         'nova_instance_id': {
             'allow_post': True,
             'allow_put': False,
@@ -404,60 +399,7 @@ RESOURCE_ATTRIBUTE_MAP = {
             'allow_put': False,
             'is_visible': True,
         },
-    },
-    'vnfjobinfo': {
-        'job_id': {
-            'allow_post': False,
-            'allow_put': False,
-            'is_visible': True,
-            'primary_key': True
-        },
-        'name': {
-            'allow_post': True,
-            'allow_put': False,
-            'validate': {'type:string': None},
-            'is_visible': True,
-        },
-        'description': {
-            'allow_post': True,
-            'allow_put': False,
-            'validate': {'type:string': None},
-            'is_visible': True,
-        },
-        'nova_instance_id': {
-            'allow_post': True,
-            'allow_put': False,
-            'validate': {'type:string': None},
-            'is_visible': True,
-
-        },
-        'tacker_instacne_id': {
-            'allow_post': True,
-            'allow_put': False,
-            'validate': {'type:string': None},
-            'is_visible': True,
-
-        },
-        'action': {
-            'allow_post': True,
-            'allow_put': False,
-            'validate': {'type:string': None},
-            'is_visible': True,
-        },
-        'result': {
-            'allow_post': True,
-            'allow_put': False,
-            'validate': {'type:string': None},
-            'is_visible': True,
-        },
-        'status': {
-            'allow_post': True,
-            'allow_put': False,
-            'validate': {'type:string': None},
-            'is_visible': True,
-        },
-
-    },
+    }
 }
 
 

@@ -168,25 +168,25 @@ class VNFAttribute(model_base.BASE, models_v1.HasId):
 
 
 
-
-
-class vnfjobinfo(model_base.BASE):
-
-
-    __tablename__ = 'vnfjobinfo'
-
-    job_id = sa.Column(types.Uuid,primary_key=True)
-    name = sa.Column(sa.String(length=255), nullable=False)
-    description = sa.Column(sa.String(length=255), nullable=False)
-    nova_instance_id = sa.Column(sa.String(length=48), nullable=False)
-    tacker_instance_id = sa.Column(sa.String(length=48), nullable=False)
-    action = sa.Column(sa.String(length=24), nullable=False)
-    result = sa.Column(sa.String(length=24), nullable=False)
-    status = sa.Column(sa.String(length=24), nullable=False)
-   # sa.PrimaryKeyConstraint(job_id)
-   # sa.ForeignKeyConstraint(job_id, vnfbackup.job_id)
-
-    #backups = orm.relationship("vnfbackup")
+#
+#
+# class vnfjobinfo(model_base.BASE):
+#
+#
+#     __tablename__ = 'vnfjobinfo'
+#
+#     job_id = sa.Column(types.Uuid,primary_key=True)
+#     name = sa.Column(sa.String(length=255), nullable=False)
+#     description = sa.Column(sa.String(length=255), nullable=False)
+#     nova_instance_id = sa.Column(sa.String(length=48), nullable=False)
+#     tacker_instance_id = sa.Column(sa.String(length=48), nullable=False)
+#     action = sa.Column(sa.String(length=24), nullable=False)
+#     result = sa.Column(sa.String(length=24), nullable=False)
+#     status = sa.Column(sa.String(length=24), nullable=False)
+#    # sa.PrimaryKeyConstraint(job_id)
+#    # sa.ForeignKeyConstraint(job_id, vnfbackup.job_id)
+#
+#     #backups = orm.relationship("vnfbackup")
 
 class vnfbackup(model_base.BASE,models_v1.HasId,models_v1.HasTenant):
     name = sa.Column(sa.String(255), nullable=False)
@@ -197,12 +197,13 @@ class vnfbackup(model_base.BASE,models_v1.HasId,models_v1.HasTenant):
     action = sa.Column(sa.String(length=24), nullable=False)
     container = sa.Column(sa.String(length=24), nullable=False)
     storage = sa.Column(sa.String(length=36), nullable=False)
-    backup_name = sa.Column(sa.String(length=255), nullable=False)
+    storage = sa.Column(sa.String(length=36), nullable=False)
     nova_instance_id = sa.Column(sa.String(length=48), nullable=False)
     job_id = sa.Column(types.Uuid,default='',nullable=False)
     start_time = sa.Column( sa.String(length=48), nullable=False)
     end_time = sa.Column(sa.String(length=48), nullable=False)
     interval = sa.Column(sa.String(length=48), nullable=False)
+    #    # sa.ForeignKeyConstraint(job_id, vnfbackup.job_id)
 
 
 
@@ -738,23 +739,23 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
         return self._mark_vnf_status(
             vnf_id, exclude_status, constants.DEAD)
 
-    def _make_backup_dict(self,vnfbackup_db):
+    def _make_backup_dict(self,vnfbackup_db,fields = None):
     # Make DB data in Here for Backup 2!!!!
     # 17.07.06 here will write!!
         print("###########Called _make_backup_dict in vnfm_db.py ##############")
-        pass
+        res = {}
+        key_list = ('id', 'tenant_id', 'name', 'action', 'container',
+                    'storage', 'nova_instance_id','job_id','start_time','end_time','interval')
 
-
-
-
-
+        res.update((key, vnfbackup_db[key]) for key in key_list)
+        return self._fields(res, fields)
 
     def _create_backup_pre(self,context, backup_info,backup_name) :
 
     # Make DB data in Here Before make backup dict !!!!
         print("###########Called _create_backup_pre in vnfm_db.py ##############")
         name = backup_info['name']
-        action = "backup"
+        action = backup_info['action']
         container = backup_info['container']
         storage = backup_info['storage']
         start_time = backup_info['start_time']
@@ -763,13 +764,7 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
         nova_instance_id = backup_info['nova_instance_id']
         tenant_id = self._get_tenant_id_for_create(context, backup_info)
         id = str(uuid.uuid4())
-
-
-        #change backup_name -> backup_id !!!!!!!!!!!!!
-        backup_name = backup_name
-
-        #get the job_id from freezer-api .
-        job_id = str(uuid.uuid4())
+        job_id = backup_info['job_id']
 
 
         with context.session.begin(subtransactions=True):
@@ -780,7 +775,6 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
                                    action=action,
                                    container=container,
                                    storage=storage,
-                                   backup_name=backup_name,
                                    nova_instance_id=nova_instance_id,
                                    job_id=job_id,
                                    start_time=start_time,
@@ -788,33 +782,3 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
                                    interval=interval)
             context.session.add(vnfbackup_db)
         return self._make_backup_dict(vnfbackup_db)
-
-
-
-
-
-
-
-
-
-
-    """
-    ########define backupdb
-
-    def _make_backup_dict(self, backup_db, fields=None):
-        res = {}
-
-        key_list = ('id','vnf_id','tenant_id','name','job_id', 'action', 'result', 'event',
-                    'start_time', 'end_time', 'interval')
-        res.update((key, backup_db[key]) for key in key_list)
-        print("########## res",res)
-        print("######## fields",fields)
-        print("self.fields ",self._fields(res, fields))
-
-        return self._fields(res, fields)
-
-
-    def get_vnfbackup(self, context, filters=None, fields=None):
-        return self._get_collection(context, vnfbackup, self._make_backup_dict,
-                                    filters=filters, fields=fields)
-"""

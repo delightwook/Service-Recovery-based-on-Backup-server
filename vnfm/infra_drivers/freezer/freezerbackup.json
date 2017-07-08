@@ -1,0 +1,30 @@
+{
+    "job_actions":
+        [
+            {         
+            "freezer_action":{
+               	"action": "backup",
+              	"mode": "nova",
+              	"storage": "swift",
+               	"container": "freezer_backup",
+                "backup_name": "novatest3",
+                "hostname": "controller",
+                "debug": true,
+	        "snapshot": false,
+                "nova_inst_id": "eaea0ed6-fa83-4280-8225-7c0b0bb2c23f",
+		"log_file": "/root/test/freezerlog.log"
+	     }	
+            }
+        ],	
+    "job_schedule": {
+            "event" : "start",
+            "result" : "success",
+	    "status" : "stop",
+            "schedule_start_date": "2017-07-08T13:57:00",
+            "schedule_end_date": "2017-07-08T14:00:00",
+ 	    "schedule_interval" : "1 minutes"
+    },
+    "description" : "BACKUP"
+}
+
+

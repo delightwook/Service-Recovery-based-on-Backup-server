@@ -97,34 +97,10 @@ class OpenStack(abstract_driver.DeviceAbstractDriver,
     @log.log
     def create(self, plugin, context, vnf, auth_attr):
 
-
-
-        print("\n")
-        print("\n")
-        print("\n")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("############### create in Infra_drivers / openstack.py : 4")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("\n")
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print("\n")
-        print("\n")
-
         LOG.debug(_('vnf %s'), vnf)
 
         region_name = vnf.get('placement_attr', {}).get('region_name', None)
         heatclient = hc.HeatClient(auth_attr, region_name)
-
-
-
 
         tth = translate_template.TOSCAToHOT(vnf, heatclient)
         tth.generate_hot()
@@ -133,12 +109,6 @@ class OpenStack(abstract_driver.DeviceAbstractDriver,
         #self._create_freezer(freezerclient)
 
         return stack['stack']['id']
-    def create_vnfbackup(self, context, vnfbackup):
-        print("\n")
-        print("###########################################################################")
-        print("############## 2. create_vnfbackup /plugin.py : Line 419 ##################")
-        print("###########################################################################")
-        print("\n")
 
     # @log.log
     # def _create_freezer(self,freezerclient):
@@ -195,14 +165,6 @@ class OpenStack(abstract_driver.DeviceAbstractDriver,
         print("\n")
         stack = heatclient.create(fields)
 
-        print(type(fields))
-        print("############### stack : ",fields)
-        print("#######################################################")
-        print("#######################################################")
-        print("\n")
-        print("\n")
-        freezerclient = fc.FreezerClient(auth_attr, region_one)
-        freezerclient.create()
         return stack
 
     @log.log

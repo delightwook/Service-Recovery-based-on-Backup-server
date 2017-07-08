@@ -35,8 +35,9 @@ from tacker.plugins.common import constants
 from tacker.vnfm.mgmt_drivers import constants as mgmt_constants
 from tacker.vnfm import monitor
 from tacker.vnfm import vim_client
-
 from tacker.tosca import utils as toscautils
+from tacker.vnfm.infra_drivers.freezer import freezer_client as fc
+
 
 LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
@@ -115,7 +116,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
     """
     OPTS_INFRA_DRIVER = [
         cfg.ListOpt(
-            'infra_driver', default=['noop', 'openstack'],
+            'infra_driver', default=['noop', 'openstack','freezer'],
             help=_('Hosting vnf drivers tacker plugin will use')),
     ]
     cfg.CONF.register_opts(OPTS_INFRA_DRIVER, 'tacker')
@@ -262,20 +263,9 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             }
         }
         self.update_vnf(context, vnf_id, update)
-#################################### get vnf_backup good
 
 
     def _get_infra_driver(self, context, vnf_info):
-        print("#######################################################")
-        print("context ", context)
-        print("context type: ",type(context))
-        print("vnf_info ",vnf_info)
-
-        print("#######################################################")
-        print("#######################################################")
-        print("\n")
-        print("\n")
-
         vim_res = self.get_vim(context, vnf_info)
         return vim_res['vim_type'], vim_res['vim_auth']
 
@@ -356,12 +346,6 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 
     def _create_vnf(self, context, vnf, vim_auth, driver_name):
 
-        print("\n")
-        print("\n")
-        print("\n")
-        print("context : ",context)
-        print("vnf : ",vnf)
-        print("drvier_name " ,driver_name)
         print("#######################################################")
         print("#######################################################")
         print("#######################################################")
@@ -394,60 +378,6 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             return
         vnf_dict['instance_id'] = instance_id
         return vnf_dict
-
-
-
-    def _create_backup(self, context, backup_info,backup_name):
-        print("##################Called __create_backup in plugin.py################")
-        return self._create_backup_pre(context, backup_info,backup_name)
-
-
-
-
-
-
-    def create_vnfbackup(self, context, vnfbackup):
-        def _make_backup_id(backupname):
-            #### test create backup__name
-            backup_uuid = str(uuid.uuid4())
-            name = backupname
-            return name + '-vnfbackup-' + backup_uuid
-
-        print("\n")
-        print("######################################################################")
-        print("############ 2. create_vnfbackup /plugin.py : Line 419 ###############")
-        print("######################################################################")
-        print("######################################################################")
-
-        print("##########################.START STEP 1.##############################")
-
-        ###### Step 1. Create vnf backup name -> inner function.
-        backup_info  =vnfbackup['vnfbackup']
-        ####Create Backup Name
-        backup_name = _make_backup_id(backup_info['name'])
-
-        print("#########################.END STEP 1.##########################")
-
-        print("#########################.START STEP 2.##########################")
-
-        ###### Step 2. Create DB
-        backup_dict = self._create_backup(context, backup_info,backup_name)
-        print("#########################.START STEP 2.##########################")
-        return backup_dict
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     def create_vnf(self, context, vnf):
         print("\n")
@@ -489,6 +419,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             else:
                 self._report_deprecated_yaml_str()
         infra_driver, vim_auth = self._get_infra_driver(context, vnf_info)
+        self.auth_attr = vim_auth
         if infra_driver not in self._vnf_manager:
             LOG.debug(_('unknown vim driver '
                         '%(infra_driver)s in %(drivers)s'),
@@ -947,3 +878,81 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         else:
             raise vnfm.VNFInactive(vnf_id=vnf_id,
                                    message=_(' Cannot fetch details'))
+
+
+
+
+
+    def _create_backup(self, context, backup_info,backup_name):
+        print("##################Called __create_backup in plugin.py################")
+        return self._create_backup_pre(context, backup_info,backup_name)
+
+
+
+
+    def _create_freezer(self,context, backup_info):
+
+        ################## tempo configure for get the vim. plz fix it#######################
+        ################## tempo configure for get the vim. plz fix it#######################
+        ################## tempo configure for get the vim. plz fix it#######################
+
+        temp = "68932c68-ccaf-4a70-b13c-cf584c1acfa1"
+        vim_res = self.vim_client.get_vim(context, temp.decode('unicode-escape'), 'RegionOne')
+        auth_attr = vim_res['vim_auth']
+
+        #####################################################################################
+
+
+
+        fzrclient = fc.FreezerClient(auth_attr,backup_info)
+
+        job_id = fzrclient.create()
+
+        return job_id
+
+    def create_vnfbackup(self, context, vnfbackup):
+        def _make_backup_id(backupname):
+            #### test create backup__name
+            backup_uuid = str(uuid.uuid4())
+            name = backupname
+            return name + '-vnfbackup-' + backup_uuid
+
+        print("\n")
+        print("######################################################################")
+        print("############ 2. create_vnfbackup /plugin.py : Line 419 ###############")
+        print("######################################################################")
+        print("######################################################################")
+
+        print("##########################.START STEP 1.##############################")
+
+        backup_info = vnfbackup['vnfbackup']
+
+        ##### Create Backup Call freezer client##########
+
+        job_id = self._create_freezer(context,backup_info)
+        backup_info['job_id'] = job_id
+        print(backup_info)
+
+
+        print("##########################.END STEP 1.##############################")
+
+        print("##########################.START STEP 2.##############################")
+        ###### Step 1. Create vnf backup name -> inner function.
+
+        ####Create Backup Name
+        backup_name = _make_backup_id(backup_info['name'])
+
+
+
+        print("#########################.END STEP 2.##########################")
+
+        print("#########################.START STEP 3.##########################")
+
+        ###### Step 2. Create DB
+        backup_dict = self._create_backup(context, backup_info,backup_name)
+        print("#########################.START STEP 3.##########################")
+
+        return backup_dict
+
+
+

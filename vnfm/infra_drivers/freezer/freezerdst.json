@@ -6,11 +6,11 @@
                  	"action" : "backup",
                  	"mode" : "nova",
                  	"container" : "freezer_backup",
-                 	"backup_name" : "nova-test",
-			"snapshot" : "True",
+                 	"backup_name" : "nova-teaaaast",
+			"snapshot" : true,
                  	"storage" : "swift",
 			"log_file"  : "/root/test/freezerlog.log",
-                 	"nova_inst_id" : "040bd71e-427f-40f3-8353-dac12aaafdfc"
+                 	"nova_inst_id" : "0d5fbc14-04e4-4d0c-88cc-b760e4cad4c6"
                 }
             },	
             {
@@ -21,18 +21,21 @@
 			"overwrite" : "True",
 			"snapshot" : "True",
 			
-                 	"backup_name" : "nova-test",
+                 	"backup_name" : "nova-tesaaaat",
                  	"storage" : "swift",
 			"log_file"  : "/root/test/freezerlog.log",
-			"nova_restore_network" : "484b525b-94ed-4701-8d2a-0ff727cf98c6 ",
-                 	"nova_inst_id" : "040bd71e-427f-40f3-8353-dac12aaafdfc"
+			"nova_restore_network" : "484b525b-94ed-4701-8d2a-0ff727cf98c6",
+                 	"nova_inst_id" : "0d5fbc14-04e4-4d0c-88cc-b760e4cad4c6"
                 }
            }],
  	        "job_schedule": {
+                "status":  "stop",
+                "event": "",
+                "result": "success",
 		"result" : "success",
-		"schedule_start_date" : "2017-07-03T16:24:00",
+		"schedule_start_date" : "2017-07-07T17:45:00",
 		"schedule_interval" : "1 minutes",
-		"schedule_end_date" : "2017-07-03T16:25:00"
+		"schedule_end_date" : "2017-07-07T17:50:00"
   
          },
         "description" : "test-ackup"

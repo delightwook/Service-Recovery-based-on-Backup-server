@@ -20,18 +20,16 @@ from tacker.common.clients import OpenstackClients
 
 class FreezerClient(object):
     #### Freezer Client #####
-    def __init__(self,auth_attr,region_name):
-
+    def __init__(self,auth_attr,backup_info,region_name=None,):
         self.keystone = OpenstackClients(auth_attr, region_name).keystone_session
-
         self.auth_token = self.keystone.get_token()
+        self.backup_info = backup_info
         self.auth_attr = auth_attr
-
         self.endpoint = self.keystone.get_endpoint(
             service_type='backup', region_name=None)
 
 
-        print("#$############################################### 6.5 Freezer init endpoint#############################")
+
         self.client = freezerclient.Client(token=self.auth_token, username=self.auth_attr['username'], password=self.auth_attr['password'],
                           tenant_name=self.auth_attr['project_name'], auth_url=self.auth_attr['auth_url'],
                           session=self.keystone,
@@ -39,12 +37,49 @@ class FreezerClient(object):
                           project_domain_name='Default', verify=True,cert=None)
 
 
-    def get_client(self):
+    def get_client(self,backup_info):
         return self.client
 
 
+
+
+
+    def _create_doc(self,backup_info):
+        doc ={}
+        doc['description'] = "TEST-BACKUP"
+
+        freezer_action= {'freezer_action':{'backup_name': self.backup_info['name'],
+                         'container' : self.backup_info['container'],
+                         'storage':self.backup_info['storage'],'snapshot' :False,
+                         'mode' : 'nova','action': self.backup_info['action'],
+                         'log_file' : '/root/test/freezerlog.log',
+                         'nova_inst_id' : self.backup_info['nova_instance_id']}}
+
+        doc['job_actions'] = [freezer_action,]
+        doc['job_schedule'] = {'schedule_interval' : self.backup_info['interval']+' minutes',
+                               'schedule_end_date':self.backup_info['end_time'],
+                               'schedule_start_date' : self.backup_info['start_time'],
+                               'result' : 'success','event':'start','status' : 'stop'}
+        return doc
+
+
+
+
     def create(self):
-        print("Here is Function Freezer !!!!!!!!! 2017.06.29############")
-        jobs = self.client.jobs.list()
+        doc = self._create_doc(self.backup_info)
+        jobs = self.client.jobs.create(doc)
         return jobs
+
+
+
+
+
+
+
+
+
+
+
+
+
 
