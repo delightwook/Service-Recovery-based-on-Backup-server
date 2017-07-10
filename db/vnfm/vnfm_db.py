@@ -207,8 +207,20 @@ class vnfbackup(model_base.BASE,models_v1.HasId,models_v1.HasTenant):
 
 
 
+class vnfrestore(model_base.BASE,models_v1.HasId,models_v1.HasTenant):
+    name = sa.Column(sa.String(255), nullable=False)
+
+    __tablename__ = 'vnfrestore'
 
 
+    action = sa.Column(sa.String(length=24), nullable=False)
+    container = sa.Column(sa.String(length=24), nullable=False)
+    storage = sa.Column(sa.String(length=36), nullable=False)
+    nova_instance_id = sa.Column(sa.String(length=48), nullable=False)
+    job_id = sa.Column(types.Uuid,default='',nullable=False)
+    neutron_network_id = sa.Column( sa.String(length=48), nullable=False)
+
+    #    # sa.ForeignKeyConstraint(job_id, vnfbackup.job_id)
 
 
 
@@ -739,6 +751,11 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
         return self._mark_vnf_status(
             vnf_id, exclude_status, constants.DEAD)
 
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+
     def _make_backup_dict(self,vnfbackup_db,fields = None):
     # Make DB data in Here for Backup 2!!!!
     # 17.07.06 here will write!!
@@ -782,3 +799,48 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
                                    interval=interval)
             context.session.add(vnfbackup_db)
         return self._make_backup_dict(vnfbackup_db)
+
+
+    def _make_restore_dict(self,vnfrestore_db,fields = None):
+    # Make DB data in Here for Restore 2!!!!
+
+        print("###########Called _make_backup_dict in vnfm_db.py ##############")
+        res = {}
+        key_list = ('id', 'tenant_id', 'name', 'action', 'container',
+                    'storage', 'nova_instance_id','neutron_network_id','job_id')
+
+
+        res.update((key, vnfrestore_db[key]) for key in key_list)
+        return self._fields(res, fields)
+
+    def _create_restore_pre(self,context, restore_info,restore_name) :
+
+    # Make DB data in Here Before make backup dict !!!!
+        print("###########Called _create_backup_pre in vnfm_db.py ##############")
+        name = restore_info['name']
+        action = restore_info['action']
+        container = restore_info['container']
+        storage = restore_info['storage']
+        nova_instance_id = restore_info['nova_instance_id']
+        neutron_network_id = restore_info['neutron_network_id']
+        tenant_id = self._get_tenant_id_for_create(context, restore_info)
+        id = str(uuid.uuid4())
+        job_id = restore_info['job_id']
+
+
+        with context.session.begin(subtransactions=True):
+            ### here called vnfbackup class
+            vnfrestore_db = vnfrestore(id=id,
+                                   tenant_id=tenant_id,
+                                   name=name,
+                                   action=action,
+                                   container=container,
+                                   storage=storage,
+                                   nova_instance_id=nova_instance_id,
+                                   job_id=job_id,
+                                   neutron_network_id=neutron_network_id)
+            context.session.add(vnfrestore_db)
+        return self._make_restore_dict(vnfrestore_db)
+
+
+

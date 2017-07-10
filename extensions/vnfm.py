@@ -399,6 +399,51 @@ RESOURCE_ATTRIBUTE_MAP = {
             'allow_put': False,
             'is_visible': True,
         },
+    },
+    'vnfrestores': {
+        'id': {
+            'allow_post': False,
+            'allow_put': False,
+            'is_visible': True,
+            'primary_key': True
+        },
+        'name': {
+            'allow_post': True,
+            'allow_put': False,
+            'is_visible': True,
+        },
+        'tenant_id': {
+            'allow_post': True,
+            'allow_put': False,
+            'is_visible': True,
+        },
+        'action': {
+            'allow_post': True,
+            'allow_put': False,
+            'is_visible': True,
+
+        },
+        'container': {
+            'allow_post': True,
+            'allow_put': False,
+            'is_visible': True,
+
+        },
+        'storage': {
+            'allow_post': True,
+            'allow_put': False,
+            'is_visible': True,
+        },
+        'nova_instance_id': {
+            'allow_post': True,
+            'allow_put': False,
+            'is_visible': True,
+        },
+        'neutron_network_id': {
+            'allow_post': True,
+            'allow_put': False,
+            'is_visible': True,
+        },
     }
 }
 

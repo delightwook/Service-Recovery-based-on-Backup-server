@@ -20,10 +20,10 @@ from tacker.common.clients import OpenstackClients
 
 class FreezerClient(object):
     #### Freezer Client #####
-    def __init__(self,auth_attr,backup_info,region_name=None,):
+    def __init__(self,auth_attr,action_info,region_name=None,):
         self.keystone = OpenstackClients(auth_attr, region_name).keystone_session
         self.auth_token = self.keystone.get_token()
-        self.backup_info = backup_info
+        self.action_info = action_info
         self.auth_attr = auth_attr
         self.endpoint = self.keystone.get_endpoint(
             service_type='backup', region_name=None)
@@ -37,36 +37,56 @@ class FreezerClient(object):
                           project_domain_name='Default', verify=True,cert=None)
 
 
-    def get_client(self,backup_info):
+    def get_client(self):
         return self.client
 
 
 
 
 
-    def _create_doc(self,backup_info):
+    def _create_doc(self,action_info):
         doc ={}
-        doc['description'] = "TEST-BACKUP"
 
-        freezer_action= {'freezer_action':{'backup_name': self.backup_info['name'],
-                         'container' : self.backup_info['container'],
-                         'storage':self.backup_info['storage'],'snapshot' :False,
-                         'mode' : 'nova','action': self.backup_info['action'],
-                         'log_file' : '/root/test/freezerlog.log',
-                         'nova_inst_id' : self.backup_info['nova_instance_id']}}
 
-        doc['job_actions'] = [freezer_action,]
-        doc['job_schedule'] = {'schedule_interval' : self.backup_info['interval']+' minutes',
-                               'schedule_end_date':self.backup_info['end_time'],
-                               'schedule_start_date' : self.backup_info['start_time'],
-                               'result' : 'success','event':'start','status' : 'stop'}
+        if action_info['action'] == 'backup':
+
+            doc['description'] = "TEST-BACKUP"
+
+            freezer_action= {'freezer_action':{'backup_name': self.action_info['name'],
+                             'container' : self.action_info['container'],
+                             'storage':self.action_info['storage'],'snapshot' :False,
+                             'mode' : 'nova','action': self.action_info['action'],
+                             'log_file' : '/root/test/freezerlog.log',
+                             'nova_inst_id' : self.action_info['nova_instance_id']}}
+
+            doc['job_actions'] = [freezer_action,]
+            doc['job_schedule'] = {'schedule_interval' : self.action_info['interval']+' minutes',
+                                   'schedule_end_date':self.action_info['end_time'],
+                                   'schedule_start_date' : self.action_info['start_time'],
+                                   'result' : 'success','event':'start','status' : 'stop'}
+
+        elif action_info['action'] =='restore':
+            doc['description'] = "TEST-restore"
+
+            freezer_action = {'freezer_action': {'backup_name': self.action_info['name'],
+                                                 'container': self.action_info['container'],
+                                                 'storage': self.action_info['storage'], 'snapshot': False,
+                                                 'mode': 'nova', 'action': self.action_info['action'],
+                                                 'log_file': '/root/test/freezerlog.log',
+                                                 'nova_restore_network':self.action_info['neutron_network_id'],
+                                                 'nova_inst_id': self.action_info['nova_instance_id']}}
+
+            doc['job_actions'] = [freezer_action, ]
+            doc['job_schedule'] = {'result': 'success', 'event': '', 'status': 'stop'}
+
         return doc
 
 
-
-
     def create(self):
-        doc = self._create_doc(self.backup_info)
+        doc = self._create_doc(self.action_info)
+        print('##########################################')
+        print('##########################################')
+        print('##########################################',doc)
         jobs = self.client.jobs.create(doc)
         return jobs
 

@@ -219,7 +219,11 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         LOG.debug(_('vnfd %s'), vnfd)
 
 
-###### Call VNF Monitor Action
+#########################################  VNF Monitor Action #########################################
+#########################################  VNF Monitor Action #########################################
+#########################################  VNF Monitor Action #########################################
+#########################################  VNF Monitor Action #########################################
+#########################################  VNF Monitor Action #########################################
     def add_vnf_to_monitor(self, context, vnf_dict):
         dev_attrs = vnf_dict['attributes']
         mgmt_url = vnf_dict['mgmt_url']
@@ -881,6 +885,15 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 
 
 
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+
+
+    def _create_restore(self, context, restore_info,restore_name):
+        print("##################Called __create_restore in plugin.py################")
+        return self._create_restore_pre(context, restore_info, restore_name)
 
 
     def _create_backup(self, context, backup_info,backup_name):
@@ -890,7 +903,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 
 
 
-    def _create_freezer(self,context, backup_info):
+    def _create_freezer(self,context, action_info):
 
         ################## tempo configure for get the vim. plz fix it#######################
         ################## tempo configure for get the vim. plz fix it#######################
@@ -904,7 +917,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 
 
 
-        fzrclient = fc.FreezerClient(auth_attr,backup_info)
+        fzrclient = fc.FreezerClient(auth_attr,action_info)
 
         job_id = fzrclient.create()
 
@@ -955,4 +968,48 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         return backup_dict
 
 
+
+    def create_vnfrestore(self, context, vnfrestore):
+        def _make_restore_id(restorename):
+            #### test create backup__name
+            restore_uuid = str(uuid.uuid4())
+            name = restorename
+            return name + '-vnfrestore-' + restore_uuid
+
+        print("\n")
+        print("######################################################################")
+        print("############ 2. create_vnfbackup /plugin.py : Line 419 ###############")
+        print("######################################################################")
+        print("######################################################################")
+
+        print("##########################.START STEP 1.##############################")
+
+        restore_info = vnfrestore['vnfrestore']
+
+        ##### Create restore Call freezer client##########
+
+        job_id = self._create_freezer(context,restore_info)
+        restore_info['job_id'] = job_id
+        print(restore_info)
+
+
+        print("##########################.END STEP 1.##############################")
+
+        print("##########################.START STEP 2.##############################")
+        ###### Step 1. Create vnf backup name -> inner function.
+
+        ####Create Backup Name
+        restore_name = _make_restore_id(restore_info['name'])
+
+
+
+        print("#########################.END STEP 2.##########################")
+
+        print("#########################.START STEP 3.##########################")
+
+        ###### Step 2. Create DB
+        restore_dict = self._create_restore(context, restore_info,restore_name)
+        print("#########################.START STEP 3.##########################")
+
+        return restore_dict
 
