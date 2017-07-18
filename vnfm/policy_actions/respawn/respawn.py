@@ -49,6 +49,18 @@ class VNFActionRespawn(abstract_action.AbstractPolicyAction):
 #########################################  VNF Monitor Action #########################################
 #########################################  VNF Monitor Action #########################################
     def execute_action(self, plugin, context, vnf_dict, args):
+        print("\n")
+        print("\n")
+        print("\n")
+        print("###########Called execute_action in respwan.py ##############")
+        print("###########Called execute_action in respwan.py ##############")
+        print("###########Called execute_action in respwan.py ##############")
+        print("args is ",args)
+        print("vnf_dict ",vnf_dict)
+        print("\n")
+        print("\n")
+
+
         vnf_id = vnf_dict['id']
         LOG.info(_('vnf %s is dead and needs to be respawned'), vnf_id)
         attributes = vnf_dict['attributes']
@@ -81,6 +93,7 @@ class VNFActionRespawn(abstract_action.AbstractPolicyAction):
             LOG.info(_('respawned new vnf %s'), update_vnf_dict['id'])
             plugin.config_vnf(context, update_vnf_dict)
             return update_vnf_dict
+
 
         if plugin._mark_vnf_dead(vnf_dict['id']):
             _update_failure_count()

@@ -310,6 +310,13 @@ class OpenStack_Driver(abstract_vim_driver.VimAbstractDriver,
         auth_cred = self._get_auth_creds(keystone_version, vim_obj)
         auth_plugin = self._get_auth_plugin(keystone_version, **auth_cred)
         sess = session.Session(auth=auth_plugin)
+        print("#################_get_client in openstack_driver.py#####################")
+        print("#################_get_client in openstack_driver.py#####################")
+        print("#################_get_client in openstack_driver.py#####################")
+        print("client_type(session=sess)  ,",client_type(session=sess))
+        print("\n")
+        print("\n")
+        print("\n")
         return client_type(session=sess)
 
     def create_flow_classifier(self, name, fc, symmetrical=False,

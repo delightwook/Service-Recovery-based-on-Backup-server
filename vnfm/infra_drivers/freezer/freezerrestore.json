@@ -1,0 +1,24 @@
+{
+    "job_actions":
+        [
+            {         
+            "freezer_action":{
+               	"action": "restore",
+              	"mode": "nova",
+              	"storage": "swift",
+               	"container": "freezer_backup",
+                "backup_name": "novatest3",
+                "hostname": "controller",
+                "debug": true,
+	        "snapshot": false,
+                "nova_inst_id":"993ba-dbbb-4c0d-97d9-3a91553dc42b",
+                "nova_restore_network":"ce8059b3-dfb7-44a9-894b-99913f67c723",
+		"log_file": "/root/test/freezerlog.log"
+	     }	
+            }
+        ],	
+    
+    "description" : "BACKUP"
+}
+
+

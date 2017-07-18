@@ -19,7 +19,9 @@ from freezerclient.v1 import client as freezerclient
 from tacker.common.clients import OpenstackClients
 
 class FreezerClient(object):
+
     #### Freezer Client #####
+
     def __init__(self,auth_attr,action_info,region_name=None,):
         self.keystone = OpenstackClients(auth_attr, region_name).keystone_session
         self.auth_token = self.keystone.get_token()

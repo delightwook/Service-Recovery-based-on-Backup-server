@@ -96,6 +96,10 @@ policy_types:
     derived_from: tosca.policies.tacker.Failure
     action: respawn
 
+  tosca.policies.tacker.Failure.Recovery:
+    derived_from: tosca.policies.tacker.Failure
+    action: recovery
+
   tosca.policies.tacker.Failure.Terminate:
     derived_from: tosca.policies.tacker.Failure
     action: log_and_kill

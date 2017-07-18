@@ -123,8 +123,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 
     OPTS_POLICY_ACTION = [
         cfg.ListOpt(
-            'policy_action', default=['autoscaling', 'respawn',
-                                      'log_only', 'log_and_kill'],
+            'policy_action', default=['autoscaling','respawn','recovery','log_only', 'log_and_kill'],
             help=_('Hosting vnf drivers tacker plugin will use')),
     ]
     cfg.CONF.register_opts(OPTS_POLICY_ACTION, 'tacker')
@@ -139,9 +138,11 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         self._vnf_manager = driver_manager.DriverManager(
             'tacker.tacker.vnfm.drivers',
             cfg.CONF.tacker.infra_driver)
+        print("#$##############Polucy_actions : ",cfg.CONF.tacker.policy_action)
         self._vnf_action = driver_manager.DriverManager(
             'tacker.tacker.policy.actions',
             cfg.CONF.tacker.policy_action)
+        print("##########################self_vnf_action:",self._vnf_action)
         self._vnf_monitor = monitor.VNFMonitor(self.boot_wait)
         self._vnf_alarm_monitor = monitor.VNFAlarmMonitor()
 
@@ -230,6 +231,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         if 'monitoring_policy' in dev_attrs and mgmt_url:
             def action_cb(action):
                 LOG.debug('policy action: %s', action)
+                print("################### action!!!!!!",action)
                 self._vnf_action.invoke(
                     action, 'execute_action', plugin=self, context=context,
                     vnf_dict=hosting_vnf['vnf'], args={})
