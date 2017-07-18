@@ -439,6 +439,11 @@ RESOURCE_ATTRIBUTE_MAP = {
             'allow_put': False,
             'is_visible': True,
         },
+        'tacker_instance_id': {
+            'allow_post': True,
+            'allow_put': False,
+            'is_visible': True,
+        },
         'neutron_network_id': {
             'allow_post': True,
             'allow_put': False,

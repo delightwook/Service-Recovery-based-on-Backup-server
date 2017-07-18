@@ -36,11 +36,6 @@ class VimClient(object):
         """
         nfvo_plugin = manager.TackerManager.get_service_plugins().get(
             constants.NFVO)
-
-        print('#####################################')
-        print('#####################################')
-        print('#####################################vim_id ',type(vim_id))
-
         if not vim_id:
             LOG.debug(_('VIM id not provided. Attempting to find default '
                         'VIM information'))

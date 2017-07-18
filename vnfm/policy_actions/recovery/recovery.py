@@ -17,9 +17,10 @@ from oslo_utils import timeutils
 
 from tacker.db.common_services import common_services_db
 from tacker.plugins.common import constants
-from tacker.vnfm.infra_drivers.openstack import heat_client as hc
 from tacker.vnfm.policy_actions import abstract_action
 from tacker.vnfm import vim_client
+from tacker.nfvo import nfvo_plugin
+
 
 LOG = logging.getLogger(__name__)
 
@@ -34,38 +35,68 @@ def _log_monitor_events(context, vnf_dict, evt_details):
                              details=evt_details)
 
 
-class VNFActionRestore(abstract_action.AbstractPolicyAction):
+
+cnt =0
+
+class VNFActionRecovery(abstract_action.AbstractPolicyAction):
     def get_type(self):
-        return 'restore'
+        return 'recovery'
 
     def get_name(self):
-        return 'restore'
+        return 'recovery'
 
     def get_description(self):
         return 'Tacker VNF respawning policy'
-#########################################  VNF Monitor Action #########################################
-#########################################  VNF Monitor Action #########################################
-#########################################  VNF Monitor Action #########################################
-#########################################  VNF Monitor Action #########################################
-#########################################  VNF Monitor Action #########################################
+
     def execute_action(self, plugin, context, vnf_dict, args):
+        global cnt
         print("\n")
         print("\n")
         print("\n")
-        print("###########Called execute_action in restore.py ##############")
-        print("###########Called execute_action in restore.py ##############")
-        print("###########Called execute_action in restore.py ##############")
+        print("###########Called execute_action in recovery.py ##############")
+        print("###########Called execute_action in recovery.py ##############")
+        print("###########Called execute_action in recovery.py ##############")
+        print("context",context)
         print("args is ",args)
         print("vnf_dict ",vnf_dict)
         print("\n")
         print("\n")
 
+        def _fetch_vim(vim_uuid):
+            return vim_client.VimClient().get_vim(context, vim_uuid)
+
+        vnf_id = vnf_dict['id']
+        attributes = vnf_dict['attributes']
+        vim_id = vnf_dict['vim_id']
+
+
+
+        print("################ vim_id ##############",vim_id)
+
+        ##########recovery Step 1. create job and start rstore##############
+        ##########recovery Step 1. create job and start rstore##############
+        ##########recovery Step 1. create job and start rstore##############
+
+        vim_res = _fetch_vim(vim_id)
+
+
+        if cnt == 0 :
+            self.job_id = plugin._start_restore_action(context,vim_res['vim_auth'],vnf_dict['instance_id'])
+            cnt += 1
+
+
+        ##########recovery Step 2. create lb member##############
+        # pool id
+        #member
         #
-        # vnf_id = vnf_dict['id']
-        # LOG.info(_('vnf %s is dead and needs to be respawned'), vnf_id)
-        # attributes = vnf_dict['attributes']
-        # vim_id = vnf_dict['vim_id']
-        #
+
+        # 1. add member
+
+
+
+
+
+
         # def _update_failure_count():
         #     failure_count = int(attributes.get('failure_count', '0')) + 1
         #     failure_count_str = str(failure_count)
@@ -75,8 +106,7 @@ class VNFActionRestore(abstract_action.AbstractPolicyAction):
         #     attributes['dead_instance_id_' + failure_count_str] = vnf_dict[
         #         'instance_id']
         #
-        # def _fetch_vim(vim_uuid):
-        #     return vim_client.VimClient().get_vim(context, vim_uuid)
+
         #
         # def _delete_heat_stack(vim_auth):
         #     placement_attr = vnf_dict.get('placement_attr', {})

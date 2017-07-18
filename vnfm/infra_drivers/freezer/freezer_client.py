@@ -22,10 +22,9 @@ class FreezerClient(object):
 
     #### Freezer Client #####
 
-    def __init__(self,auth_attr,action_info,region_name=None,):
+    def __init__(self,auth_attr, region_name=None):
         self.keystone = OpenstackClients(auth_attr, region_name).keystone_session
         self.auth_token = self.keystone.get_token()
-        self.action_info = action_info
         self.auth_attr = auth_attr
         self.endpoint = self.keystone.get_endpoint(
             service_type='backup', region_name=None)
@@ -47,18 +46,31 @@ class FreezerClient(object):
 
 
     def _create_doc(self,action_info):
+        self.action_info = action_info
+
         doc ={}
 
 
         if action_info['action'] == 'backup':
+            print("###################################")
+            print("###################################")
+            print("###################################")
+            print("###################################")
+            print("###################################")
+            print("###################################")
+            print("###################################")
 
             doc['description'] = "TEST-BACKUP"
+
+
+            ############### overwrite#@###################
 
             freezer_action= {'freezer_action':{'backup_name': self.action_info['name'],
                              'container' : self.action_info['container'],
                              'storage':self.action_info['storage'],'snapshot' :False,
                              'mode' : 'nova','action': self.action_info['action'],
                              'log_file' : '/root/test/freezerlog.log',
+                             'overwrite':True,
                              'nova_inst_id' : self.action_info['nova_instance_id']}}
 
             doc['job_actions'] = [freezer_action,]
@@ -74,7 +86,7 @@ class FreezerClient(object):
                                                  'container': self.action_info['container'],
                                                  'storage': self.action_info['storage'], 'snapshot': False,
                                                  'mode': 'nova', 'action': self.action_info['action'],
-                                                 'log_file': '/root/test/freezerlog.log',
+                                                 'log_file': '/root/log.log',
                                                  'nova_restore_network':self.action_info['neutron_network_id'],
                                                  'nova_inst_id': self.action_info['nova_instance_id']}}
 
@@ -84,13 +96,16 @@ class FreezerClient(object):
         return doc
 
 
-    def create(self):
-        doc = self._create_doc(self.action_info)
-        print('##########################################')
-        print('##########################################')
-        print('##########################################',doc)
+    def create(self,action_info):
+        doc = self._create_doc(action_info)
         jobs = self.client.jobs.create(doc)
         return jobs
+
+    def start(self,job_id):
+        print("###################start job!!!!!!!!!!!!!!!!")
+        jobs = self.client.jobs.start_job(job_id)
+        return jobs
+
 
 
 

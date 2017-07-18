@@ -219,6 +219,9 @@ class vnfrestore(model_base.BASE,models_v1.HasId,models_v1.HasTenant):
     nova_instance_id = sa.Column(sa.String(length=48), nullable=False)
     job_id = sa.Column(types.Uuid,default='',nullable=False)
     neutron_network_id = sa.Column( sa.String(length=48), nullable=False)
+    tacker_instance_id = sa.Column(sa.String(length=48), nullable=False)
+
+
 
     #    # sa.ForeignKeyConstraint(job_id, vnfbackup.job_id)
 
@@ -756,6 +759,26 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
 ########################################################################################################################
 ########################################################################################################################
 
+    # def get_vnfrestores(self, context, filters=None, fields=None):
+    #
+    #     return self._get_collection(context, VNF, self._make_vnf_dict,
+    #                                 filters=filters, fields=fields)
+
+
+
+
+    # get   tacker id to job_id
+    def get_tacker_id_to_job_id(self, context,tacker_instance_id, fields=None,filters=None):
+
+        vnfrestore_items = self._get_collection(context, vnfrestore, self._make_restore_dict,filters=filters, fields=fields)
+        print("vnfrestore_items[0]['tacker_instance_id']",vnfrestore_items[0]['tacker_instance_id'])
+
+        for i in vnfrestore_items :
+            if i['tacker_instance_id'] == tacker_instance_id :
+                print(i['job_id'])
+                return i['job_id']
+
+
     def _make_backup_dict(self,vnfbackup_db,fields = None):
     # Make DB data in Here for Backup 2!!!!
     # 17.07.06 here will write!!
@@ -807,7 +830,7 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
         print("###########Called _make_backup_dict in vnfm_db.py ##############")
         res = {}
         key_list = ('id', 'tenant_id', 'name', 'action', 'container',
-                    'storage', 'nova_instance_id','neutron_network_id','job_id')
+                    'storage', 'nova_instance_id','neutron_network_id','job_id','tacker_instance_id')
 
 
         res.update((key, vnfrestore_db[key]) for key in key_list)
@@ -826,6 +849,7 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
         tenant_id = self._get_tenant_id_for_create(context, restore_info)
         id = str(uuid.uuid4())
         job_id = restore_info['job_id']
+        tacker_instance_id = restore_info['tacker_instance_id']
 
 
         with context.session.begin(subtransactions=True):
@@ -838,7 +862,8 @@ class VNFMPluginDb(vnfm.VNFMPluginBase, db_base.CommonDbMixin):
                                    storage=storage,
                                    nova_instance_id=nova_instance_id,
                                    job_id=job_id,
-                                   neutron_network_id=neutron_network_id)
+                                   neutron_network_id=neutron_network_id,
+                                   tacker_instance_id= tacker_instance_id)
             context.session.add(vnfrestore_db)
         return self._make_restore_dict(vnfrestore_db)
 

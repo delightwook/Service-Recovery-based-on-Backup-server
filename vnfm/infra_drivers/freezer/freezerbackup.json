@@ -10,7 +10,7 @@
                 "backup_name": "novatest3",
                 "hostname": "controller",
                 "debug": true,
-	        "snapshot": false,
+                "snapshot": false,
                 "nova_inst_id": "eaea0ed6-fa83-4280-8225-7c0b0bb2c23f",
 		"log_file": "/root/test/freezerlog.log"
 	     }	

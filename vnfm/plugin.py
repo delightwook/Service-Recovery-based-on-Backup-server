@@ -66,6 +66,7 @@ class VNFMMgmtMixin(object):
         self._mgmt_manager = driver_manager.DriverManager(
             'tacker.tacker.mgmt.drivers', cfg.CONF.tacker.mgmt_driver)
 
+
     def _invoke(self, vnf_dict, **kwargs):
         method = inspect.stack()[1][3]
         return self._mgmt_manager.invoke(
@@ -116,14 +117,14 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
     """
     OPTS_INFRA_DRIVER = [
         cfg.ListOpt(
-            'infra_driver', default=['noop', 'openstack','freezer'],
+            'infra_driver', default=['noop', 'openstack'],
             help=_('Hosting vnf drivers tacker plugin will use')),
     ]
     cfg.CONF.register_opts(OPTS_INFRA_DRIVER, 'tacker')
 
     OPTS_POLICY_ACTION = [
         cfg.ListOpt(
-            'policy_action', default=['autoscaling','respawn','recovery','log_only', 'log_and_kill'],
+            'policy_action', default=['autoscaling','respawn','log_only', 'log_and_kill','recovery'],
             help=_('Hosting vnf drivers tacker plugin will use')),
     ]
     cfg.CONF.register_opts(OPTS_POLICY_ACTION, 'tacker')
@@ -138,13 +139,14 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         self._vnf_manager = driver_manager.DriverManager(
             'tacker.tacker.vnfm.drivers',
             cfg.CONF.tacker.infra_driver)
-        print("#$##############Polucy_actions : ",cfg.CONF.tacker.policy_action)
+
         self._vnf_action = driver_manager.DriverManager(
             'tacker.tacker.policy.actions',
             cfg.CONF.tacker.policy_action)
-        print("##########################self_vnf_action:",self._vnf_action)
+
         self._vnf_monitor = monitor.VNFMonitor(self.boot_wait)
         self._vnf_alarm_monitor = monitor.VNFAlarmMonitor()
+
 
     def spawn_n(self, function, *args, **kwargs):
         self._pool.spawn_n(function, *args, **kwargs)
@@ -893,6 +895,30 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 ########################################################################################################################
 
 
+
+
+
+
+
+    def _start_restore_action(self,context,auth_attr,tacker_instance_id):
+        ################## tempo configure for get the job_id. plz fix it#######################
+        ################## tempo configure for get the job_id. plz fix it#######################
+        ################## tempo configure for get the job_id. plz fix it#######################
+        job_id=  self.get_tacker_id_to_job_id(context,tacker_instance_id, fields=None)
+
+        fzrclient = fc.FreezerClient(auth_attr)
+        print(job_id)
+        fzrclient.start(job_id)
+        print("#####################################")
+        print("#####################################")
+        print("#############Success job#########")
+
+
+
+
+
+
+
     def _create_restore(self, context, restore_info,restore_name):
         print("##################Called __create_restore in plugin.py################")
         return self._create_restore_pre(context, restore_info, restore_name)
@@ -911,17 +937,15 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         ################## tempo configure for get the vim. plz fix it#######################
         ################## tempo configure for get the vim. plz fix it#######################
 
-        temp = "68932c68-ccaf-4a70-b13c-cf584c1acfa1"
+        temp = "f99bee67-6425-4ae3-940e-8c76b633a64b"
         vim_res = self.vim_client.get_vim(context, temp.decode('unicode-escape'), 'RegionOne')
         auth_attr = vim_res['vim_auth']
 
         #####################################################################################
 
+        fzrclient = fc.FreezerClient(auth_attr,'RegionOne')
 
-
-        fzrclient = fc.FreezerClient(auth_attr,action_info)
-
-        job_id = fzrclient.create()
+        job_id = fzrclient.create(action_info)
 
         return job_id
 

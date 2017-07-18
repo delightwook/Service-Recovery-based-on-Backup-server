@@ -7,7 +7,7 @@
               	"mode": "nova",
               	"storage": "swift",
                	"container": "freezer_backup",
-                "backup_name": "novatest3",
+                "backup_name": "restoretest",
                 "hostname": "controller",
                 "debug": true,
 	        "snapshot": false,
