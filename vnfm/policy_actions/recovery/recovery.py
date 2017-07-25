@@ -23,6 +23,7 @@ from tacker.nfvo.drivers.vim import openstack_driver
 from novaclient import client
 from keystoneauth1 import session
 from keystoneauth1.identity import v3
+import time
 
 LOG = logging.getLogger(__name__)
 
@@ -73,6 +74,8 @@ class VNFActionRecovery(abstract_action.AbstractPolicyAction):
 
 
 
+
+
         print("################ vim_id ##############",vim_id)
 
         ##########recovery Step 1. create job and start rstore##############
@@ -81,78 +84,130 @@ class VNFActionRecovery(abstract_action.AbstractPolicyAction):
 
         vim_res = _fetch_vim(vim_id)
 
-
-        if cnt == 0 :
-            self.job_id = plugin._start_restore_action(context,vim_res['vim_auth'],vnf_dict['instance_id'])
-            print(vim_res)
-            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx')
-            print(vnf_dict)
-            cnt += 1
-
-
-        ##########recovery Step 2. create lb member##############
-        # pool id
-        #member
-        #
-
-        # 1. add member
-        ### get new Nova IP address
-
-        auth = v3.Password(auth_url=vim_res['vim_auth']['auth_url'],username=vim_res['vim_auth']['username']
-                           ,password=vim_res['vim_auth']['password'],
+        auth = v3.Password(auth_url=vim_res['vim_auth']['auth_url'], username=vim_res['vim_auth']['username']
+                           , password=vim_res['vim_auth']['password'],
                            project_name=vim_res['vim_auth']['project_name'],
                            user_domain_id=vim_res['vim_auth']['user_domain_name'],
                            project_domain_id=vim_res['vim_auth']['project_domain_name'])
-        sess = session.Session(auth = auth)
-        novaclient=client.Client("2.1",session=sess)
+        sess = session.Session(auth=auth)
+        novaclient = client.Client("2.1", session=sess)
 
-
-        ############################### Need Sujung ################################
         ip = vnf_dict['mgmt_url'].split(':')
         ###### ALL network Search
 
         ############################### Need Sujung ################################
 
-        new_ip = ip[1].replace("}","")
-
-        result_ip = (new_ip.replace("\"","")).strip()
-
-        novadict = novaclient.servers.list(search_opts={'ip':str(result_ip)})
-
-        # ListWithMetadata Tyoe
-
-        novaname = novadict[0]
-        novahead=novaclient.servers.get(novaname)
-        print("#######################################################")
-        print("#######################################################")
-        print("#######################################################")
-        print(type(novahead))
-        print("#######################################################")
-        print("##########s#############################################")
-        print("#######################################################")
-        print("#######################################################")
 
 
+        new_ip = ip[1].replace("}", "")
 
-        # findnova = novaclient.servers.list(search_opts={'name':str(novaname)})
+        result_ip = (new_ip.replace("\"", "")).strip()
+
+        novadict = novaclient.servers.list(search_opts={'ip': str(result_ip)})
+        novaname = novadict[0].name
+        findnova = novaclient.servers.list(search_opts={'name': str(novaname)})
+
+        for status in findnova :
+            if  status.status == 'ACTIVE':
+                print("NOOOOOOOOOOOOOOOOOOOOOPssssssss")
+                print("status ",status.status)
+                return
+
+        if cnt == 0 :
 
 
 
-        #
-        #neutronclient = openstack_drive
-        # r.NeutronClient(vim_res['vim_auth'])
-        #
-        # creatmemfeed = neutronclient.client.create_lbaas_member('test-lb-pool-socket',)
-
-
-        print("#########################################")
-        print("###########createmembfeed#################")
-        print("#########################################")
-        print("#########################################")
-        print("#########################################")
+            self.job_id = plugin._start_restore_action(context, vim_res['vim_auth'], vnf_dict['instance_id'])
+            print(vim_res)
+            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx')
+            print(vnf_dict)
 
 
 
+            ############################### Need Sujung ################################
+            ip = vnf_dict['mgmt_url'].split(':')
+            ###### ALL network Search
+
+            ############################### Need Sujung ################################
+
+
+            while True:
+                new_ip = ip[1].replace("}","")
+
+                result_ip = (new_ip.replace("\"","")).strip()
+
+                novadict = novaclient.servers.list(search_opts={'ip':str(result_ip)})
+                novaname = novadict[0].name
+                findnova=novaclient.servers.list(search_opts={'name':str(novaname)})
+
+
+                self.newnova_ip = ""
+
+                for novacls in findnova :
+                    print("find nova name :",novacls.name)
+                    print("find nova ip : ",novacls.addresses)
+                    if novacls.status =='ACTIVE':
+                        print("RESTORE NOVA IP type: ",type(novacls.addresses['net0'][0]))
+                        print("RESTORE NOVA IP addr: ",str(novacls.addresses['net0'][0]['addr']))
+                        self.newnova_ip = str(novacls.addresses['net0'][0]['addr'])
+                        break
+
+
+
+                if self.newnova_ip  !='':
+                    break
+
+
+
+
+            neutronclient = openstack_driver.NeutronClient(vim_res['vim_auth'])
+            subnet_list =neutronclient.client.list_subnets()
+
+            pool_list = neutronclient.client.list_lbaas_pools()
+            print("#####################",pool_list)
+            pool = pool_list['pools']
+
+            subnet = subnet_list['subnets']
+            print(subnet)
+
+            for sub_id in  subnet:
+                if str(sub_id['name']) =='net0':
+                    self.subnet_id = sub_id['id']
+
+            for pool_id in pool:
+                if str(pool_id['name']) == 'test-lb-pool-socket':
+                    self.pool_id = pool_id['id']
+
+
+
+
+            kwargs = {
+                'address': self.newnova_ip,
+                'protocol_port': '18090',
+                'admin_state_up': 'true',
+                'subnet_id':self.subnet_id,
+                'weight':1
+            }
+
+            print("#########################################")
+            print("###########XXXXXXXXXXXXX#################")
+            print("#########################################")
+            print("#########################################")
+            print("#########################################")
+
+            res = neutronclient.client.create_lbaas_member(self.pool_id, {'member': kwargs})
+
+
+            print("#########################################")
+            print("###########createmembfeed#################")
+            print("#########################################")
+            print("#########################################")
+            print("#########################################")
+
+
+            print("############END RECOVERY#####################")
+
+        cnt += 1
 
 
 
@@ -176,11 +231,11 @@ class VNFActionRecovery(abstract_action.AbstractPolicyAction):
         #     placement_attr = vnf_dict.get('placement_attr', {})
         #     region_name = placement_attr.get('region_name')
         #     heatclient = hc.HeatClient(auth_attr=vim_auth,
-        #                                region_name=region_name)
+        #                                region_nam=region_name)
         #     heatclient.delete(vnf_dict['instance_id'])
         #     LOG.debug(_("Heat stack %s delete initiated"), vnf_dict[
         #         'instance_id'])
-        #     _log_monitor_events(context, vnf_dict, "ActionRespawnHeat invoked")
+        #     _log_monitor_events(context, vnf_dict, "ActionespawnHeat invoked")
         #
         # def _respin_vnf():
         #     update_vnf_dict = plugin.create_vnf_sync(context, vnf_dict)

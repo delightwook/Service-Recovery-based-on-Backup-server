@@ -908,10 +908,12 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 
         fzrclient = fc.FreezerClient(auth_attr)
         print(job_id)
-        fzrclient.start(job_id)
+        x = fzrclient.start(job_id)
         print("#####################################")
         print("#####################################")
         print("#############Success job#########")
+
+        print("result ====================x",x)
 
 
 

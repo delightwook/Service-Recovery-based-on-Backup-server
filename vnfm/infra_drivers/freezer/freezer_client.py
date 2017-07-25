@@ -66,8 +66,8 @@ class FreezerClient(object):
             ############### overwrite#@###################
 
             freezer_action= {'freezer_action':{'backup_name': self.action_info['name'],
-                             'container' : self.action_info['container'],
-                             'storage':self.action_info['storage'],'snapshot' :False,
+                             'container' : self.action_info['container'],'snapshot':False,
+                             'storage':self.action_info['storage'],
                              'mode' : 'nova','action': self.action_info['action'],
                              'log_file' : '/root/test/freezerlog.log',
                              'overwrite':True,
@@ -84,7 +84,7 @@ class FreezerClient(object):
 
             freezer_action = {'freezer_action': {'backup_name': self.action_info['name'],
                                                  'container': self.action_info['container'],
-                                                 'storage': self.action_info['storage'], 'snapshot': False,
+                                                 'storage': self.action_info['storage'],
                                                  'mode': 'nova', 'action': self.action_info['action'],
                                                  'log_file': '/root/log.log',
                                                  'nova_restore_network':self.action_info['neutron_network_id'],
